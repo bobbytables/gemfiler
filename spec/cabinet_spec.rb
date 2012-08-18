@@ -5,6 +5,7 @@ describe Gemfiler::Cabinet do
 
   context '.collect' do
     before(:each) { subject.collect }
+
     it 'retrieves all gems and stores them.' do
       subject.gems.should include({name: 'gemfiler'})
     end
@@ -19,6 +20,18 @@ describe Gemfiler::Cabinet do
 
     it 'always puts a gem group into the plural key' do
       subject.gems.should include({name: 'somegemthesecond', groups: ['test2']})
+    end
+  end
+
+  context 'bundler methods' do
+    before(:each) { subject.collect }
+
+    it 'enables gemspec' do
+      subject.has_gemspec.should be_true
+    end
+
+    it 'can define a ruby version' do
+      subject.ruby_version[:version].should eq('1.9.2')
     end
   end
 end

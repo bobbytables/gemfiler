@@ -1,3 +1,6 @@
+gemspec
+ruby '1.9.2'
+
 gem 'gemfiler'
 gem 'rspec', '2.11'
 

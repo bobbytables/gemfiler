@@ -23,7 +23,7 @@ module Gemfiler
     end
 
     def gemspec
-      @gemspec = true
+      @has_gemspec = true
     end
 
     def ruby(version, engine={})

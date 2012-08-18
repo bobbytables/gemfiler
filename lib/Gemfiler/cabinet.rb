@@ -6,10 +6,7 @@ module Gemfiler
     attr_reader :source, :source_contents
 
     # Bundler Specific accessors
-    attr_accessor :ruby, :sources
-
-
-    GEM_REGEX = /gem ['|"](.+)['|"]/
+    attr_accessor :ruby_version, :sources, :has_gemspec
 
     def initialize(source)
       @source = source
