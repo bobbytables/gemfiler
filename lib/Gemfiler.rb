@@ -1,5 +1,6 @@
-require "Gemfiler/version"
+require "gemfiler/version"
 
 module Gemfiler
-  # Your code goes here...
+  autoload :Cabinet, 'gemfiler/cabinet'
+  autoload :BundlerMethods, 'gemfiler/bundler_methods'
 end
