@@ -33,5 +33,9 @@ describe Gemfiler::Cabinet do
     it 'can define a ruby version' do
       subject.ruby_version[:version].should eq('1.9.2')
     end
+
+    it 'can define a ruby version w/ engine' do
+      subject.ruby_version[:engine].should eq('jruby')
+    end
   end
 end
