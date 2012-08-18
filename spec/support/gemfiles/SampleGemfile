@@ -1,2 +1,8 @@
 gem 'gemfiler'
 gem 'rspec', '2.11'
+
+group :test do
+  gem 'somegem'
+end
+
+gem 'somegemthesecond', group: 'test2'

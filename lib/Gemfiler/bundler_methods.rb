@@ -10,6 +10,13 @@ module Gemfiler
         gem.merge! args.first
       end
 
+      gem[:groups] = @groups.map(&:to_s) if @groups
+
+      if gem[:group]
+        gem[:groups] ||= []
+        gem[:groups] << gem.delete(:group)
+      end
+
       @gems << gem
 
       gem
