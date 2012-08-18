@@ -3,9 +3,21 @@ ruby '1.9.2', engine: 'jruby'
 
 gem 'gemfiler'
 gem 'rspec', '2.11'
+gem 'somegemthesecond', group: 'test2'
 
 group :test do
   gem 'somegem'
 end
 
-gem 'somegemthesecond', group: 'test2'
+
+platforms :ruby do
+  gem 'plat'
+end
+
+git 'git://github.com/rails/rails.git' do
+  gem 'rails'
+end
+
+git 'git://github.com/rails/rails.git', ref: '2f7cb5e9' do
+  gem 'rails2'
+end

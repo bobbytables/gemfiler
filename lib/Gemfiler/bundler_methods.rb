@@ -11,6 +11,12 @@ module Gemfiler
       end
 
       gem[:groups] = @groups.map(&:to_s) if @groups
+      gem[:platforms] = @platforms.map(&:to_s) if @platforms
+
+      if @git
+        gem[:git] = @git
+        gem.merge! @git_options
+      end
 
       if gem[:group]
         gem[:groups] ||= []
@@ -39,6 +45,22 @@ module Gemfiler
       @groups = names.uniq
       self.instance_eval(&block)
       @groups = nil
+    end
+
+    def platforms(*names, &block)
+      @platforms = names.uniq
+      self.instance_eval(&block)
+      @platforms = nil
+    end
+
+    def git(url, options={}, &block)
+      @git         = url
+      @git_options = options
+
+      self.instance_eval(&block)
+      
+      @git         = nil
+      @git_options = nil
     end
   end
 end
