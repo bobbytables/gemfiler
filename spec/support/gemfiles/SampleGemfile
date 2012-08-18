@@ -1,5 +1,5 @@
 gemspec
-ruby '1.9.2', engine: 'jruby'
+ruby '1.9.2', engine: 'jruby', engine_version: '1.0'
 
 gem 'gemfiler'
 gem 'rspec', '2.11'
