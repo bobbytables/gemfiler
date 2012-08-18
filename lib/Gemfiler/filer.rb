@@ -40,6 +40,18 @@ module Gemfiler
       cabinet.shim.gemspec? ? 'gemspec' : ''
     end
 
+    def ruby
+      parts = []
+
+      if version_info = cabinet.shim.ruby_version
+        parts << "ruby '#{version_info[:version]}'"
+        parts << ":engine => '#{version_info[:engine]}'" if version_info[:engine]
+        parts << ":engine_version => '#{version_info[:engine_version]}'" if version_info[:engine_version]
+      end
+
+      parts.join(', ')
+    end
+
     private
 
     def alphabetize_from_array(gems)

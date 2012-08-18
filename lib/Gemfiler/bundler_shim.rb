@@ -6,7 +6,7 @@ module Gemfiler
     def initialize
       @gems         = []
       @sources      = []
-      @ruby_version = {}
+      @ruby_version = nil
       @has_gemspec  = false
     end
 

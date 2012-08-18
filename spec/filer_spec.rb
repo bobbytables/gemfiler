@@ -46,5 +46,9 @@ describe Gemfiler::Filer do
     it '.gemspec returns a gemspec line' do
       subject.gemspec.should match /gemspec/
     end
+
+    it '.ruby returns the correct ruby definition' do
+      subject.ruby.should match /ruby '1.9.3'/
+    end
   end
 end
