@@ -21,3 +21,8 @@ end
 git 'git://github.com/rails/rails.git', ref: '2f7cb5e9' do
   gem 'rails2'
 end
+
+group :randomgroup do
+  gem 'testgem1'
+  gem 'testgem2'
+end

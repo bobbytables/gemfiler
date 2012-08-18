@@ -1,0 +1,12 @@
+source 'http://rubygems.org'
+gemspec
+
+group :randomgroup do
+  gem 'testgem1'
+  gem 'testgem2'
+  gem 'bbb'
+end
+
+gem 'aaa'
+gem 'uncategorized1'
+gem 'uncategorized2'

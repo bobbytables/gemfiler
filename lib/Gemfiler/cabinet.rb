@@ -1,21 +1,19 @@
 module Gemfiler
   class Cabinet
-    include BundlerMethods
+    attr_reader :gemfile, :source_contents, :shim
 
-    attr_accessor :gems
-    attr_reader :source, :source_contents
-
-    # Bundler Specific accessors
-    attr_accessor :ruby_version, :sources, :has_gemspec
-
-    def initialize(source)
-      @source = source
-      @gems   = []
+    def initialize(gemfile)
+      @gemfile = gemfile
+      @shim    = BundlerShim.new
     end
 
-    def collect
-      @source_contents ||= File.read(source)
-      eval(@source_contents)
+    def gems
+      self.shim.gems
+    end
+
+    def collect!
+      @source_contents ||= File.read(gemfile)
+      self.shim.gather(@source_contents)
     end
   end
 end

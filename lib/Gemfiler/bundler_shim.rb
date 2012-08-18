@@ -1,5 +1,23 @@
 module Gemfiler
-  module BundlerMethods
+  class BundlerShim
+    attr_accessor :gems, :ruby_version, :sources, :has_gemspec
+    attr_reader :cabinet
+
+    def initialize
+      @gems         = []
+      @sources      = []
+      @ruby_version = {}
+      @has_gemspec  = false
+    end
+
+    def gather(source)
+      eval(source)
+    end
+
+    def gemspec?
+      @has_gemspec
+    end
+
     def gem(name, *args)
       gem = {name: name}
 
@@ -10,7 +28,7 @@ module Gemfiler
         gem.merge! args.first
       end
 
-      gem[:groups] = @groups.map(&:to_s) if @groups
+      gem[:groups]    = @groups.map(&:to_s) if @groups
       gem[:platforms] = @platforms.map(&:to_s) if @platforms
 
       if @git
@@ -37,7 +55,6 @@ module Gemfiler
     end
 
     def source(source)
-      @sources ||= []
       @sources << source
     end
 
