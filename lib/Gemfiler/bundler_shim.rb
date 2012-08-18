@@ -51,7 +51,7 @@ module Gemfiler
     end
 
     def ruby(version, engine={})
-      @ruby_version = {version: version, engine: engine[:engine], engine_version: engine[:engine_version]}
+      @ruby_version = {version: version}.merge(engine)
     end
 
     def source(source)
