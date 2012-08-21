@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+$:.push File.expand_path("../lib", __FILE__)
 require File.expand_path('../lib/Gemfiler/version', __FILE__)
 
 Gem::Specification.new do |gem|
@@ -9,11 +10,13 @@ Gem::Specification.new do |gem|
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.executables      = `git ls-files -- exe/*`.split("\n").map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^spec/})
   gem.name          = "Gemfiler"
   gem.require_paths = ["lib"]
   gem.version       = Gemfiler::VERSION
+
+  gem.add_runtime_dependency('thor', '~> 0.16')
 
   gem.add_development_dependency('rspec', '~> 2.11')
   gem.add_development_dependency('awesome_print')
