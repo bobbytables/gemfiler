@@ -2,10 +2,11 @@ require 'erb'
 
 module Gemfiler
   class Output
-    attr_reader :filer
+    attr_reader :filer, :options
 
-    def initialize(filer)
-      @filer = filer
+    def initialize(filer, options={})
+      @filer   = filer
+      @options = options
     end
 
     def write(gemfile)
@@ -34,8 +35,8 @@ module Gemfiler
       parts = []
       if version_info = filer.shim.ruby_version
         parts << "ruby '#{version_info[:version]}'"
-        parts << ":engine => '#{version_info[:engine]}'" if version_info[:engine]
-        parts << ":engine_version => '#{version_info[:engine_version]}'" if version_info[:engine_version]
+        parts << hash_keyvalue(:engine, version_info[:engine]) if version_info[:engine]
+        parts << hash_keyvalue(:engine_version, version_info[:engine_version]) if version_info[:engine_version]
       end
 
       parts.join(', ')
@@ -49,8 +50,9 @@ module Gemfiler
     end
 
     def longest_gem_name(group=nil)
+      @longest ||= {}
       gems = group ? groups[group] : filer.uncategorized
-      gems.inject(0) {|max, gem| gem[:name].length > max ? gem[:name].length : max }
+      @longest[group] ||= gems.inject(0) {|max, gem| gem[:name].length > max ? gem[:name].length : max }
     end
 
     def groups
@@ -72,19 +74,27 @@ module Gemfiler
       end
     end
 
+    def hash_keyvalue(key, value)
+      if @options[:ruby19_hashes]
+        "#{key.to_s}: #{type_value(value)}"
+      else
+        "#{type_value(key)} => #{type_value(value)}"
+      end
+    end
+
     # It's a short parameter name because my syntax highlighter doesn't like the word "gem"
     def gem_line(g, groups=nil)
       gem_name = g[:name]
-      line = ["gem '#{gem_name}'"]
+      line     = ["gem '#{gem_name}'"]
 
-      space_between = longest_gem_name(groups) - gem_name.length
+      space_between = @options[:nice_spaces] ? longest_gem_name(groups) - gem_name.length : 0
 
       if g[:version]
         line << (' ' * space_between) + "'#{g[:version]}'"
       elsif (g.length - 1) > 0
         line << (' ' * space_between) + g.inject([]) do |options, (key, value)|
           if key != :name
-            options << ":#{key} => #{type_value(value)}"
+            options << hash_keyvalue(key, value)
           end
 
           options
