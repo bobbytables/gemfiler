@@ -9,7 +9,7 @@ module Gemfiler
     end
 
     def write(gemfile)
-      File.open(File.expand_path('~/Sites/testing.txt', __FILE__), 'w') do |file|
+      File.open(gemfile, 'w') do |file|
         file.write(content)
       end
     end
@@ -62,10 +62,8 @@ module Gemfiler
         ":#{value.to_s}"
       when String
         "'#{value}'"
-      when Fixnum
+      when Fixnum, TrueClass, FalseClass
         value.to_s
-      when TrueClass, FalseClass
-        
       end
     end
 

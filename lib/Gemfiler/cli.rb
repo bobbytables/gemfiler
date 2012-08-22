@@ -5,6 +5,8 @@ module Gemfiler
     desc 'file', 'Organizes your Gemfile.'
 
     def file(gemfile='./Gemfile')
+      gemfile = File.expand_path("../../../#{gemfile}", __FILE__)
+
       cabinet = Gemfiler::Cabinet.new(gemfile)
       cabinet.collect!
 
