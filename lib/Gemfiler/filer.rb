@@ -11,7 +11,7 @@ module Gemfiler
     def group
       cabinet.gems.each do |gem|
         if gem[:groups]
-          gem_groups           = gem[:groups].sort
+          gem_groups           = gem.delete(:groups).sort
           groups[gem_groups] ||= []
           groups[gem_groups] << gem
         else
