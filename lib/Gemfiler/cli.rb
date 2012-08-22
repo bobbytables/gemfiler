@@ -8,7 +8,12 @@ module Gemfiler
       cabinet = Gemfiler::Cabinet.new(gemfile)
       cabinet.collect!
 
-      filer = Gemfiler::Filer.new(cabinet)
+      filer  = Gemfiler::Filer.new(cabinet)
+      filer.group
+      filer.alphabetize
+      output = Gemfiler::Output.new(filer)
+
+      output.write(gemfile)
     end
   end
 end

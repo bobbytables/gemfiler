@@ -1,0 +1,12 @@
+<%= sources.join("\n") %>
+<%= gemspec %>
+<%= ruby %>
+<% uncategorized_gems.each do |gem_line| %>
+<%= gem_line %><% end %>
+
+<% groups.each do |group, gems| %>
+group <%= group.map{|g| type_value(g.to_sym) }.join(', ') %> do
+  <% gems.each do |gem| %><%= gem_line(gem) %>
+  <% end %>
+end
+<% end %>

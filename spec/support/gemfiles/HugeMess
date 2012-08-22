@@ -1,0 +1,129 @@
+source 'http://rubygems.org'
+
+# Essential gems
+gem 'rails', '3.1.6'
+gem 'rack', '1.3.6'
+gem 'thin'
+gem 'unicorn'
+gem 'foreman'
+
+# Resque and plugins
+gem 'resque', :require => 'resque/server', :git => 'https://github.com/defunkt/resque.git'
+gem 'resque-scheduler', :require => 'resque_scheduler'
+gem 'redis-namespace'
+gem 'god'
+
+# Payment processing and shopping cart gems
+gem "activemerchant", "~> 1.21.0"
+
+gem 'jude', :git => 'git@github.com:1703india/jude.git'
+
+gem 'mookie', :git => 'git@github.com:1703india/mookie.git'
+
+gem 'authorize-net', '~> 1.5.2'
+
+gem 'fog'
+gem 'devise'
+gem 'defaultable', :git => 'git@github.com:bobbytables/defaultable.git', :ref => 'fade89061fb5'
+gem 'kaminari'
+
+gem 'timecop'
+gem 'geocoder'
+
+# Authentication and permissions gems
+gem 'cobra', :git => 'git@github.com:1703india/cobra.git'
+gem 'cancan', '1.6.7'
+
+# Model extension and validation gems
+gem 'state_machine'
+gem 'validates_timeliness', '~> 3.0.2'
+gem 'gmaps4rails'
+gem 'chronic'
+gem 'paper_trail'
+gem 'no_peeping_toms', :git => 'git://github.com/patmaddox/no-peeping-toms.git'
+gem "tire", :git => 'git@github.com:bobbytables/tire.git', :ref => '543f4b410f6c7b4ce62b4b866fb45a2339642b16'
+gem 'draper', '~> 0.9'
+
+# View helper gems
+gem 'formtastic', '~> 2'
+gem 'formtastic_datepicker_inputs', :git => 'https://github.com/adyard/formtastic_datepicker_inputs.git'
+gem 'redcarpet'
+
+# File attachment gems
+gem 'carrierwave', :git => 'https://github.com/jnicklas/carrierwave.git'
+gem 'mini_magick'
+
+# Email helper gems
+gem 'liquid'
+
+# Postgres DB adapter gem and multi-schema helper
+gem 'pg'
+gem 'apartment'
+
+# API related gems
+gem 'httparty'
+gem 'grape', :git => 'https://github.com/intridea/grape.git'
+
+# External services
+gem 'assistly'
+
+# Asset pipeline gems
+gem 'jquery-rails'
+
+# No explanation needed.
+gem 'newrelic_rpm'
+
+# Deployment stuff
+gem 'capistrano'
+gem 'capistrano_colors'
+gem 'highline', '1.6.5'
+gem 'airbrake'
+
+# ESP
+gem 'acts_as_icontact', :git => 'https://github.com/dcondomitti/acts_as_icontact.git'
+
+# Debugging Tools
+group :development, :test do
+  gem 'pry'       
+  gem 'awesome_print'
+  gem 'spin'
+  gem 'guard-spin'
+end
+
+# We need to explicitly define a JavaScript runtime for non-OS X platforms
+group :production do
+  gem 'therubyracer'
+end
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+end
+
+group :development do
+  gem 'rails-dev-tweaks', '~> 0.5.1'
+  gem 'active_reload'
+  gem 'ruby-prof'
+  gem 'factory_girl_rails', '1.7.0'
+  gem 'syntax'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  # SQLite has been moved to development only due to dependencies in CentOS/RHEL
+  gem 'sqlite3'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '1.7.0'
+  gem 'spork', '0.9.0.rc9'
+  gem 'simplecov', :require => false
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
+  gem 'capybara'
+  gem 'growl'
+end
+
