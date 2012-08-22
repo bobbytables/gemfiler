@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
-  gem.executables      = `git ls-files -- exe/*`.split("\n").map{ |f| File.basename(f) }
+  gem.executables   = ['gemfiler']
   gem.test_files    = gem.files.grep(%r{^spec/})
   gem.name          = "gemfiler"
   gem.require_paths = ["lib"]
