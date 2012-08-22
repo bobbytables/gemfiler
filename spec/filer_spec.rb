@@ -35,20 +35,4 @@ describe Gemfiler::Filer do
       subject.groups[['randomgroup']].first[:name].should eq('bbb')
     end
   end
-
-  context 'gemfile output methods' do
-    before(:each) { cabinet.collect! }
-
-    it '.source returns sources' do
-      subject.sources.should match /source 'http:\/\/rubygems\.org'/
-    end
-
-    it '.gemspec returns a gemspec line' do
-      subject.gemspec.should match /gemspec/
-    end
-
-    it '.ruby returns the correct ruby definition' do
-      subject.ruby.should match /ruby '1.9.3'/
-    end
-  end
 end

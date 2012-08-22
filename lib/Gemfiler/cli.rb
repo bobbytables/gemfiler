@@ -1,3 +1,5 @@
+require 'awesome_print'
+
 module Gemfiler
   class CLI < Thor
     desc 'file', 'Organizes your Gemfile.'
@@ -6,7 +8,7 @@ module Gemfiler
       cabinet = Gemfiler::Cabinet.new(gemfile)
       cabinet.collect!
 
-      ap cabinet
+      filer = Gemfiler::Filer.new(cabinet)
     end
   end
 end

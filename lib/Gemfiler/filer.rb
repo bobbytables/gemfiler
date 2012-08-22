@@ -29,27 +29,9 @@ module Gemfiler
       end
     end
 
-    def sources
-      cabinet.shim.sources.inject([]) do |a, source|
-        a << "source '#{source}'"
-        a
-      end.join("\n")
-    end
-
-    def gemspec
-      cabinet.shim.gemspec? ? 'gemspec' : ''
-    end
-
-    def ruby
-      parts = []
-
-      if version_info = cabinet.shim.ruby_version
-        parts << "ruby '#{version_info[:version]}'"
-        parts << ":engine => '#{version_info[:engine]}'" if version_info[:engine]
-        parts << ":engine_version => '#{version_info[:engine_version]}'" if version_info[:engine_version]
-      end
-
-      parts.join(', ')
+    # Delegate shim
+    def shim
+      cabinet.shim
     end
 
     private
