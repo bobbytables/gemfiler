@@ -13,7 +13,7 @@ describe Gemfiler::Output do
       subject.sources.should match /source 'http:\/\/rubygems\.org'/
     end
 
-    it '.source returns sources even as symbols' do
+    it '.source returns sources as symbols' do
       subject.sources.should match /source \:rubygems/
     end
 
