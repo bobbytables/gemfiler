@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables      = `git ls-files -- exe/*`.split("\n").map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^spec/})
-  gem.name          = "Gemfiler"
+  gem.name          = "gemfiler"
   gem.require_paths = ["lib"]
   gem.version       = Gemfiler::VERSION
 
