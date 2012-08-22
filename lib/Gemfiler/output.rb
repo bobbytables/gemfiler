@@ -15,7 +15,7 @@ module Gemfiler
     end
 
     def content
-      erb = ERB.new(File.read(File.expand_path('../templates/gemfile.erb', __FILE__)))
+      erb = ERB.new(File.read(File.expand_path('../templates/gemfile.erb', __FILE__)), nil, '<>')
       erb.result(binding)
     end
 
@@ -43,9 +43,14 @@ module Gemfiler
 
     def uncategorized_gems
       filer.uncategorized.inject([]) do |gems, gem|
-        gems << gem_line(gem)
+        gems << self.gem_line(gem)
         gems
       end
+    end
+
+    def longest_gem_name(group=nil)
+      gems = group ? groups[group] : filer.uncategorized
+      gems.inject(0) {|max, gem| gem[:name].length > max ? gem[:name].length : max }
     end
 
     def groups
@@ -68,15 +73,20 @@ module Gemfiler
     end
 
     # It's a short parameter name because my syntax highlighter doesn't like the word "gem"
-    def gem_line(g)
-      gem_name = g.delete(:name)
+    def gem_line(g, groups=nil)
+      gem_name = g[:name]
       line = ["gem '#{gem_name}'"]
 
+      space_between = longest_gem_name(groups) - gem_name.length
+
       if g[:version]
-        line << "'#{g[:version]}'"
-      elsif g.length > 0
-        line << g.inject([]) do |options, (key, value)|
-          options << ":#{key} => #{type_value(value)}"
+        line << (' ' * space_between) + "'#{g[:version]}'"
+      elsif (g.length - 1) > 0
+        line << (' ' * space_between) + g.inject([]) do |options, (key, value)|
+          if key != :name
+            options << ":#{key} => #{type_value(value)}"
+          end
+
           options
         end.join(', ')
       end

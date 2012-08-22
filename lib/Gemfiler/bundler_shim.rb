@@ -20,6 +20,7 @@ module Gemfiler
     end
 
     def gem(name, *args)
+      return unless name.length > 0
       gem = {name: name}
 
       case args.first

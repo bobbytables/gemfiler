@@ -22,7 +22,6 @@ module Gemfiler
 
     def alphabetize
       self.uncategorized = alphabetize_from_array(self.uncategorized)
-
       self.groups = self.groups.inject({}) do |hash, (groups, gems)|
         hash[groups] = alphabetize_from_array(gems)
         hash
