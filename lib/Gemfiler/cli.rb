@@ -4,8 +4,8 @@ module Gemfiler
   class CLI < Thor
     desc 'file', 'Organizes your Gemfile.'
 
-    def file(gemfile='./Gemfile')
-      gemfile = File.expand_path("../../../#{gemfile}", __FILE__)
+    def file(gemfile='Gemfile')
+      gemfile = "#{Dir.pwd}/#{gemfile}"
 
       cabinet = Gemfiler::Cabinet.new(gemfile)
       cabinet.collect!
