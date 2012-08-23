@@ -1,5 +1,4 @@
 
-
 # Gemfiler
 
 Gemfiler will take your Gemfile and make it nice. It will alphabetize and group everything correctly. It can also turn hash syntax into Ruby's 1.9 hash syntax, and align versions / options nicely.
@@ -60,7 +59,7 @@ gem 'validates_timeliness', '~> 3.0.2'
 ```
 
 
-## Gotcha's
+## Gotchas
   Gemfiler works by acting like Bundler, it executes the Gemfile under a shim, and passes all of the gems as objects around Gemfiler.
 
   * Comments go away (Working on this)
