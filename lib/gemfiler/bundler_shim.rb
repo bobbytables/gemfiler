@@ -11,7 +11,7 @@ module Gemfiler
     end
 
     def gather(source)
-      source = source.gsub /source[\s]+\:([\w_]+)/, 'source(:\\1)'
+      source = source.gsub /source[\s]+\:([\w_]+)/, "source(:\\1)"
       instance_eval(source)
     end
 

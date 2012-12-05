@@ -1,4 +1,4 @@
-require 'erb'
+require "erb"
 
 module Gemfiler
   class Output
@@ -10,13 +10,13 @@ module Gemfiler
     end
 
     def write(gemfile)
-      File.open(gemfile, 'w') do |file|
+      File.open(gemfile, "w") do |file|
         file.write(content)
       end
     end
 
     def content
-      erb = ERB.new(File.read(File.expand_path('../templates/gemfile.erb', __FILE__)), nil, '<>')
+      erb = ERB.new(File.read(File.expand_path("../templates/gemfile.erb", __FILE__)), nil, "<>")
       erb.result(binding)
     end
 
@@ -28,7 +28,7 @@ module Gemfiler
     end
 
     def gemspec
-      filer.shim.gemspec? ? 'gemspec' : ''
+      filer.shim.gemspec? ? "gemspec" : ""
     end
 
     def ruby
@@ -39,7 +39,7 @@ module Gemfiler
         parts << hash_keyvalue(:engine_version, version_info[:engine_version]) if version_info[:engine_version]
       end
 
-      parts.join(', ')
+      parts.join(", ")
     end
 
     def uncategorized_gems
@@ -60,7 +60,7 @@ module Gemfiler
     end
 
     def spacer
-      '  '
+      "  "
     end
 
     def type_value(value)
@@ -90,18 +90,18 @@ module Gemfiler
       space_between = @options[:nice_spaces] ? longest_gem_name(groups) - gem_name.length : 0
 
       if g[:version]
-        line << (' ' * space_between) + "'#{g[:version]}'"
+        line << (" " * space_between) + "'#{g[:version]}'"
       elsif (g.length - 1) > 0
-        line << (' ' * space_between) + g.inject([]) do |options, (key, value)|
+        line << (" " * space_between) + g.inject([]) do |options, (key, value)|
           if key != :name
             options << hash_keyvalue(key, value)
           end
 
           options
-        end.join(', ')
+        end.join(", ")
       end
 
-      line.join(', ')
+      line.join(", ")
     end
   end
 end
