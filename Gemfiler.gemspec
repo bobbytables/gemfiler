@@ -19,5 +19,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency('thor', '~> 0.16')
 
   gem.add_development_dependency('rspec', '~> 2.11')
+  gem.add_development_dependency('rake')
   gem.add_development_dependency('awesome_print')
 end
