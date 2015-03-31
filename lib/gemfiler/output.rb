@@ -109,10 +109,15 @@ module Gemfiler
         puts "-- Annotating #{gem_name}"
         uri = URI.parse("https://rubygems.org/api/v1/gems/#{gem_name}.json")
         response = Net::HTTP.get_response(uri)
-        parsed = JSON.load(response.body)
-        info = parsed['info']
 
-        annotation = " # #{info}"
+        if response === Net::HTTPNotFound
+          parsed = JSON.load(response.body)
+          info = parsed['info']
+
+          annotation = " # #{info}"
+        else
+          puts "---- Gem #{gem_name} not a valid gem"
+        end
       end
 
       line.join(", ") + annotation
