@@ -4,7 +4,7 @@ module Gemfiler
   class CLI < Thor
 
     desc "file", "Organizes your Gemfile."
-    method_options nice_spaces: :boolean, ruby19_hashes: :boolean
+    method_options nice_spaces: :boolean, ruby19_hashes: :boolean, annotate: :boolean
     def file(gemfile="Gemfile")
       gemfile = "#{Dir.pwd}/#{gemfile}"
 

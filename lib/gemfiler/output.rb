@@ -1,4 +1,6 @@
 require "erb"
+require "json"
+require "net/http"
 
 module Gemfiler
   class Output
@@ -101,7 +103,19 @@ module Gemfiler
         end.join(", ")
       end
 
-      line.join(", ")
+      annotation = ""
+
+      if @options[:annotate]
+        puts "-- Annotating #{gem_name}"
+        uri = URI.parse("https://rubygems.org/api/v1/gems/#{gem_name}.json")
+        response = Net::HTTP.get_response(uri)
+        parsed = JSON.load(response.body)
+        info = parsed['info']
+
+        annotation = " # #{info}"
+      end
+
+      line.join(", ") + annotation
     end
   end
 end
