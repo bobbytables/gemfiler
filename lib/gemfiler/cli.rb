@@ -1,5 +1,3 @@
-require "awesome_print"
-
 module Gemfiler
   class CLI < Thor
 

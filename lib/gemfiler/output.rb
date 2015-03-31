@@ -110,7 +110,7 @@ module Gemfiler
         uri = URI.parse("https://rubygems.org/api/v1/gems/#{gem_name}.json")
         response = Net::HTTP.get_response(uri)
 
-        if response.kind_of?(Net::HTTPFound)
+        if response.code == "200"
           parsed = JSON.load(response.body)
           info = parsed['info']
 
