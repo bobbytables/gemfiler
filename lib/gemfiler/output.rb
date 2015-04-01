@@ -113,6 +113,7 @@ module Gemfiler
         if response.code == "200"
           parsed = JSON.load(response.body)
           info = parsed['info']
+          info = info.gsub("\n", " ")
 
           annotation = " # #{info}"
         else
